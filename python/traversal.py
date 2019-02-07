@@ -36,24 +36,64 @@ def blindExplore(direction):
 def findExits(exits):
     unexplored = []
     for direction in exits:
-        if exitList[direction] == '?':
+        if exits[direction] == '?':
             unexplored.append(direction)
+        else:
+            pass
     if len(unexplored) > 0:
         return unexplored
-
-mapGraph = {0: {'n': '?', 's': '?', 'w': '?', 'e': '?'}}
+    else:
+        return None
 
 roomInfo = viewRoom()
-time.sleep(1)
-roomExits = roomInfo['exits']
-# exits = findExits(roomExits)
+time.sleep(roomInfo['cooldown'])
+
+mapGraph = {0: [(60, 60), {'n': '?', 's': '?', 'w': '?', 'e': '?'}]}
+inversalKey = {'n': 's', 's': 'n', 'w': 'e', 'e': 'w'}
+stroll = []
+
+exploreStack = Stack()
+exploreStack.push(roomInfo['room_id'])
+
+print(exploreStack.stack)
+
+while exploreStack.size() < 5:
+    exitOptions = mapGraph[roomInfo['room_id']][1]
+    checkExits = findExits(exitOptions)
+    if checkExits is not None:
+        firstExit = checkExits[0]
+        enterFrom = exploreStack.stack[-1]
+        stroll.append(firstExit)
+        newRoom = blindExplore(firstExit)
+        print(newRoom)
+        time.sleep(roomInfo['cooldown'])
+
+        mapGraph[enterFrom][1][firstExit] = roomInfo['room_id']
+
+        exitDict = {}
+        if newRoom['room_id'] in exploreStack.stack:
+            mapGraph[newRoom['room_id']][1][inversalKey[firstExit]] = enterFrom
+        else:
+            for exit in newRoom['exits']:
+                exitDict[exit] = '?'
+            exitDict[inversalKey[firstExit]] = enterFrom
+            mapGraph[newRoom['room_id']][0] = newRoom['coordinates']
+            mapGraph[newRoom['room_id']][1] = exitDict
+        exploreStack.push(newRoom['room_id'])
+    
+    else:
+        finishedRoom = exploreStack.pop()
+        if exploreStack.size() > 0:
+            lastRoom = exploreStack.stack[-1]
+            for route, room in mapGraph[lastRoom][1].items():
+                if room == finishedRoom:
+                    stroll.append(inversalKey[route])
+                    roomInfo = wiseExplore(room, inversalKey[route])
+                    time.sleep(roomInfo['cooldown'])
+                    break
+print(mapGraph)
+
 # roomInfo = viewRoom()
 # firstMove = wiseExplore('0', 's')
 # print(firstMove['room_id'])
 # print(roomInfo['exits'])
-
-print(roomExits)
-# exploreStack = Stack()
-# exploreStack.push(roomInfo['room_id'])
-
-# print(exploreStack.stack)
