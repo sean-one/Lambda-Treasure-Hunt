@@ -5,6 +5,13 @@
 /.pnp
 .pnp.js
 
+# deleted from other gitignore file
+db.sqlite3
+.env
+Lambda-Treasure-Hunt.sublime-*
+*.pyc
+variables.py
+
 # testing
 /coverage
 
