@@ -13,7 +13,7 @@ class App extends Component {
     console.log(locations)
     return (
       <div className="App">
-        {this.state.locations.map(roomID => <div>{roomID}</div>)}
+        <h1>THIS IS THE HEADER</h1>
       </div>
     );
   }
