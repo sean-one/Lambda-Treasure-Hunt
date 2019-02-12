@@ -2,7 +2,7 @@ import requests
 import json
 import time
 import math
-from variables import token, tokenContent
+# from variables import token, tokenContent
 from stack import Stack
 
 urlRoot = 'https://lambda-treasure-hunt.herokuapp.com/api/adv/'
