@@ -3,15 +3,16 @@ import React from 'react';
 const Room = (props) => {
     return (
         <div className='room'>
-            <p className='roomId'>0</p>
-            <p className='roomTitle'>A brightly lit room</p>
-            <p className='description'>You are standing in the center of a brightly lit room. You notice a shop to the west and exits to the north, south and east.</p>
-            <p className='elevation'>0</p>
-            <p className='terrain'>NORMAL</p>
-            <p className='items'>[]</p>
-            <p className='exits'>[]</p>
-            <p className='messages'>You have walked west.</p>
-            <p className='error'></p>
+            <p className='roomId'>{props.room.room_id}</p>
+            <p className='roomTitle'>{props.room.title}</p>
+            <p className='cooldown'>wait: {props.room.cooldown}</p>
+            <p className='description'>{props.room.description}</p>
+            <p className='elevation'>{props.room.elevation}</p>
+            <p className='terrain'>{props.room.terrain}</p>
+            <p className='items'>{props.room.items}</p>
+            <p className='exits'>{props.room.exits}</p>
+            <p className='messages'>{props.room.messages}</p>
+            <p className='error'>{props.room.error}</p>
         </div>
     )
 }
