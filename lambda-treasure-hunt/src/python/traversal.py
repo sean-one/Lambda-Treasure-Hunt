@@ -2,7 +2,7 @@ import requests
 import json
 import time
 import math
-# from variables import token, tokenContent
+from variables import token, tokenContent
 from stack import Stack
 
 urlRoot = 'https://lambda-treasure-hunt.herokuapp.com/api/adv/'
@@ -34,9 +34,10 @@ stroll = []
 
 # gather information on the room
 locations[roomInfo['room_id']] = {
+    'room_id' : roomInfo['room_id'],
     'title' : roomInfo['title'],
     'description' : roomInfo['description'],
-    'coordinates' : roomInfo['coordinates'],
+    'coordinates' : [int(roomInfo['coordinates'][1:3]), int(roomInfo['coordinates'][4:6])],
     'elevation' : roomInfo['elevation'],
     'terrain' : roomInfo['terrain'],
     'items' : roomInfo['items'],
@@ -50,7 +51,7 @@ locations[roomInfo['room_id']] = {
 exploreStack = Stack()
 exploreStack.push(roomInfo['room_id'])
 
-while exploreStack.size() > 0:
+while exploreStack.size() < 3:
     exitOptions = mapGraph[exploreStack.stack[-1]]
     checkExits = findExits(exitOptions)
     if checkExits is not None:
@@ -69,9 +70,10 @@ while exploreStack.size() > 0:
 
         # gather needed room information
         locations[roomInfo['room_id']] = {
+            'room_id' : roomInfo['room_id'],
             'title' : roomInfo['title'],
             'description' : roomInfo['description'],
-            'coordinates' : roomInfo['coordinates'],
+            'coordinates' : [int(roomInfo['coordinates'][1:3]), int(roomInfo['coordinates'][4:6])],
             'elevation' : roomInfo['elevation'],
             'terrain' : roomInfo['terrain'],
             'items' : roomInfo['items'],
@@ -105,9 +107,10 @@ while exploreStack.size() > 0:
                     roomInfo = requests.post(f'{urlRoot}move/', headers=tokenContent, json={'direction': inversalKey[route]}).json()
                     time.sleep(roomInfo['cooldown'])
                     locations[roomInfo['room_id']] = {
+                        'room_id' : roomInfo['room_id'],
                         'title' : roomInfo['title'],
                         'description' : roomInfo['description'],
-                        'coordinates' : roomInfo['coordinates'],
+                        'coordinates' : [int(roomInfo['coordinates'][1:3]), int(roomInfo['coordinates'][4:6])],
                         'elevation' : roomInfo['elevation'],
                         'terrain' : roomInfo['terrain'],
                         'items' : roomInfo['items'],
