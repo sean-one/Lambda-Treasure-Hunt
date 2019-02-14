@@ -51,7 +51,7 @@ locations[roomInfo['room_id']] = {
 exploreStack = Stack()
 exploreStack.push(roomInfo['room_id'])
 
-while exploreStack.size() < 3:
+while exploreStack.size() > 0:
     exitOptions = mapGraph[exploreStack.stack[-1]]
     checkExits = findExits(exitOptions)
     if checkExits is not None:
