@@ -3,18 +3,21 @@ import './Location.css';
 
 const Location = (props) => {
     const plot = {
-        bottom: (props.location.coordinates[1] - 46) * 68,
-        right: (30 - (props.location.coordinates[0] - 45)) * 68
+        bottom: (props.location.coordinates[1] - 46) * 70,
+        right: (30 - (props.location.coordinates[0] - 50)) * 70
     };
-    const edges = props.location.exits
-    // n - border-top
-    // s - border-bottom
-    // e - border-left
-    // w - border-right
-    console.log(edges)
+    const exits = {
+        height: '100%',
+        width: '100%',
+        borderTop: (props.location.exits.includes("n")) ? 'none' : '1px black solid',
+        borderBottom: (props.location.exits.includes("s")) ? 'none' : '1px black solid',
+        borderRight: (props.location.exits.includes("e")) ? 'none' : '1px black solid',
+        borderLeft: (props.location.exits.includes("w")) ? 'none' : '1px black solid'
+    }
+
     return (
         <div className='room' style={plot}>
-            <p>{props.location.room_id}</p>
+            <p style={exits}>{props.location.room_id}</p>
         </div>
     )
 }

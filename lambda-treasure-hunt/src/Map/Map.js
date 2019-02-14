@@ -16,12 +16,16 @@ class Map extends Component{
         }
     }
 
+    getRoom = (event) => {
+        console.log(event.currentTarget.id)
+    }
+
     render() {
         return (
         <div className='map'>
             {this.state.mapLocations.map(location => {
                 return (
-                    <div key={location.room_id}>
+                    <div id={location.room_id} onClick={this.getRoom} key={location.room_id}>
                         <Location location={location} />
                     </div>
                 )
