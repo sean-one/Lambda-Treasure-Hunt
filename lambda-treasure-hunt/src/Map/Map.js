@@ -26,7 +26,7 @@ class Map extends Component{
             {this.state.mapLocations.map(location => {
                 return (
                     <div id={location.room_id} onClick={this.getRoom} key={location.room_id}>
-                        <Location location={location} />
+                        <Location room={this.props.room} location={location} />
                     </div>
                 )
             })}

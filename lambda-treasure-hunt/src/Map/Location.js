@@ -4,7 +4,8 @@ import './Location.css';
 const Location = (props) => {
     const plot = {
         bottom: (props.location.coordinates[1] - 46) * 70,
-        right: (30 - (props.location.coordinates[0] - 50)) * 70
+        right: (30 - (props.location.coordinates[0] - 50)) * 70,
+        backgroundColor: (props.room.room_id === props.location.room_id) ? "red" : "lightgrey"
     };
     const exits = {
         height: '100%',

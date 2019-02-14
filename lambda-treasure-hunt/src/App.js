@@ -19,24 +19,33 @@ class App extends Component {
     }
 
   }
-  // componentDidMount() {
-  //   const authKey = `Token ${process.env.REACT_APP_TOKEN_KEY}`
-  //   axios.get(`${process.env.REACT_APP_BASE_URL}init/`, { headers: { 'Authorization': authKey } })
-  //     .then(res => {
-  //       this.setState({
-  //         'currentRoom': res.data
-  //       })
-  //     })
-  // }
+  componentDidMount() {
+    const authKey = `Token ${process.env.REACT_APP_TOKEN_KEY}`
+    axios.get(`${process.env.REACT_APP_BASE_URL}init/`, { headers: { 'Authorization': authKey } })
+      .then(res => {
+        this.setState({
+          'currentRoom': res.data
+        })
+      })
+  }
   mover = (event) => {
-    console.log(event.currentTarget.id)
+    const authKey = `Token ${process.env.REACT_APP_TOKEN_KEY}`
+    const data = {
+      'direction': `${event.currentTarget.id}`
+    }
+    axios.post(`${process.env.REACT_APP_BASE_URL}move/`, data, { headers: { 'Authorization': authKey, 'Content-Type': 'application/json' } })
+      .then(res => {
+        this.setState({
+          'currentRoom': res.data
+        })
+      })
   }
   render() {
     return (
       <div className="App">
         <Header />
         <div className="main">
-          <Map />
+          <Map room={this.state.currentRoom}/>
           <div className='controls'>
             <Room room={this.state.currentRoom}/>
             <Movement mover={this.mover}/>
