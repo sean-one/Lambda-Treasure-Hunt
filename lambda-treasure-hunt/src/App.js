@@ -18,15 +18,15 @@ class App extends Component {
     }
 
   }
-  componentDidMount() {
-    const authKey = `Token ${process.env.REACT_APP_TOKEN_KEY}`
-    axios.get(`${process.env.REACT_APP_BASE_URL}init/`, { headers: { 'Authorization': authKey } })
-      .then(res => {
-        this.setState({
-          'currentRoom': res.data
-        })
-      })
-  }
+  // componentDidMount() {
+  //   const authKey = `Token ${process.env.REACT_APP_TOKEN_KEY}`
+  //   axios.get(`${process.env.REACT_APP_BASE_URL}init/`, { headers: { 'Authorization': authKey } })
+  //     .then(res => {
+  //       this.setState({
+  //         'currentRoom': res.data
+  //       })
+  //     })
+  // }
   mover = (event) => {
     console.log(event.currentTarget.id)
   }
