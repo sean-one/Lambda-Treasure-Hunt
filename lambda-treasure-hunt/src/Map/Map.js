@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import Location from './Location'
+import './Map.css'
 
 import locations from '../python/locations.json'
 
 const mapLocations = []
 for (let i in locations) {
-    mapLocations.push([i, locations[i]])
+    mapLocations.push(locations[i])
 }
 class Map extends Component{
     constructor() {
@@ -17,10 +18,10 @@ class Map extends Component{
 
     render() {
         return (
-        <div>
+        <div className='map'>
             {this.state.mapLocations.map(location => {
                 return (
-                    <div key={location[0]}>
+                    <div key={location.room_id}>
                         <Location location={location} />
                     </div>
                 )

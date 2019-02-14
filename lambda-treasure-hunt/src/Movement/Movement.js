@@ -1,5 +1,7 @@
 import React from 'react';
 
+import './Movement.css';
+
 const Movement = (props) => {
     return (
         <div>

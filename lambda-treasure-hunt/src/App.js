@@ -4,6 +4,7 @@ import axios from 'axios';
 import './App.css';
 
 // Components
+import Header from './Header/Header';
 import Movement from './Movement/Movement';
 import Map from './Map/Map';
 import Room from './Room/Room';
@@ -33,10 +34,14 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <h1>Lambda Treasure Hunt</h1>
-        <Map />
-        <Room room={this.state.currentRoom}/>
-        <Movement mover={this.mover}/>
+        <Header />
+        <div className="main">
+          <Map />
+          <div className='controls'>
+            <Room room={this.state.currentRoom}/>
+            <Movement mover={this.mover}/>
+          </div>
+        </div>
       </div>
     );
   }
